@@ -9,6 +9,10 @@ router = APIRouter()
 def hello_world() -> dict:
     return {"hello": "world"}
 
+@router.get("/posts/{id}")
+def add(id: int) -> dict:
+    return {"post_id": id}
+
 app.include_router(router)
 
 # @app.get("/posts/{id}")
