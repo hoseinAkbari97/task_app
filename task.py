@@ -16,3 +16,8 @@ def add(task: str):
 def update(index: int, task: str):
     task_list[index] = task
     return {"tasks": task_list}
+
+@task_router.delete("/")
+def delete(index: int):
+    del task_list[index]
+    return {"tasks": task_list}
