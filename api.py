@@ -1,11 +1,10 @@
 from fastapi import FastAPI, APIRouter
+from task import task_router
 
 app = FastAPI()
-# @app.get("/")
-# def hello_world() -> dict:
-#     return {"hello": "world"}
 router = APIRouter()
-@router.get("/")
+
+@router.get("/hello")
 def hello_world() -> dict:
     return {"hello": "world"}
 
@@ -13,9 +12,6 @@ def hello_world() -> dict:
 def add(id: int) -> dict:
     return {"post_id": id}
 
-app.include_router(router)
 
-# @app.get("/posts/{id}")
-# def add(id: int) -> dict:
-#     # TODO
-#     return {"post_id": id}
+app.include_router(router)
+app.include_router(task_router, prefix="/tasks")
