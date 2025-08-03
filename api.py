@@ -15,3 +15,8 @@ def add(id: int) -> dict:
 
 app.include_router(router)
 app.include_router(task_router, prefix="/tasks")
+
+# curl-X 'POST' \
+# 'http://127.0.0.1:8000/New%20Task' \-H 'accept: application/json' \-d ''
+# 15
+# Request URL
