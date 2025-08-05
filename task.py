@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from models import StatusType
 
 task_router = APIRouter()
 task_list = []
@@ -9,7 +10,10 @@ def get():
 
 @task_router.post("/{task}")
 def add(task: str):
-    task_list.append(task)
+    task_list.append({
+        "task": task,
+        "status": StatusType.PENDING,
+    })
     return {"tasks": task_list}
     
 @task_router.put("/")
