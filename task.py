@@ -28,3 +28,6 @@ def update(index: int, task: str, status: StatusType):
 def delete(index: int):
     del task_list[index]
     return {"tasks": task_list}
+
+# This is a dummy code, remove it later
+print("Hello World")
