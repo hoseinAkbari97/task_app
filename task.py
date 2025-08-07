@@ -30,4 +30,4 @@ def delete(index: int):
     return {"tasks": task_list}
 
 # This is a dummy code, remove it later
-print("Hello World")
+print("Welcome to FastAPI")
