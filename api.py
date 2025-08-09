@@ -16,8 +16,16 @@ def add(id: int) -> dict:
 def page(
     page: int = Query(1, ge=1, le=20),
     size: int = Query(5, ge=5, le=20)
-    ):
+):
     return {"page": page, "size": size}
+
+@app.get("/phone/{phone}")
+# The phone number is like +34 111 12-34-56
+def phone(
+    phone: str = 
+    Query(pattern=r"^(\(?\+[\d]{1,3}\)?)\s?([\d]{1,5})\s?([\d][\s\.-]?){6,7}$" )
+):
+    return {"phone": phone}
 
 app.include_router(router)
 app.include_router(task_router)
