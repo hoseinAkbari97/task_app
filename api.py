@@ -14,7 +14,7 @@ def add(id: int) -> dict:
 
 @app.get("/page")
 def page(
-    page: int = Query(1, ge=1, le=20),
+    page: int = Query(1, gt=0, title='page visualizer'),
     size: int = Query(5, ge=5, le=20)
 ):
     return {"page": page, "size": size}
