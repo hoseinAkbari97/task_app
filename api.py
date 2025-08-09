@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter
+from fastapi import FastAPI, APIRouter, Query
 from task import task_router
 
 app = FastAPI()
@@ -12,6 +12,12 @@ def hello_world() -> dict:
 def add(id: int) -> dict:
     return {"post_id": id}
 
+@app.get("/page")
+def page(
+    page: int = Query(1, ge=1, le=20),
+    size: int = Query(5, ge=5, le=20)
+    ):
+    return {"page": page, "size": size}
 
 app.include_router(router)
 app.include_router(task_router)

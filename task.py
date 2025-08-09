@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Query
+from fastapi import APIRouter
 from models import StatusType
 
 task_router = APIRouter()
