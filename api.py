@@ -29,5 +29,3 @@ def phone(
 
 app.include_router(router)
 app.include_router(task_router)
-
-print("This is a dummy print statement to test the query")
