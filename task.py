@@ -8,12 +8,13 @@ task_list = []
 def get():
     return {"tasks": task_list}
 
-@task_router.post("/{task}")
+@task_router.post("/")
 def add(task: str = Body()):
     task_list.append({
         "task": task,
         "status": StatusType.PENDING,
     })
+    print(task_list)
     return {"tasks": task_list}
     
 @task_router.put("/")
