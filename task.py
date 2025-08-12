@@ -18,7 +18,7 @@ def add(task: str = Body()):
     return {"tasks": task_list}
     
 @task_router.put("/")
-def update(index: int, task: str, status: StatusType):
+def update(index: int, task: str = Body(), status: StatusType = Body()):
     task_list[index] = {
         "task": task,
         "status": status,
