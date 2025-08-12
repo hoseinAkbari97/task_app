@@ -1,4 +1,4 @@
-from fastapi import FastAPI, APIRouter, Query, Path, Body
+from fastapi import FastAPI, APIRouter, Query, Path
 from task import task_router
 
 app = FastAPI()
