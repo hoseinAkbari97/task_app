@@ -10,12 +10,6 @@ def get():
 
 @task_router.post("/")
 def add(task: Task):
-    # task_list.append({
-    #     "task": task,
-    #     "status": StatusType.PENDING,
-    # })
-    # print(task_list)
-    
     return {"tasks": task_list}
     
 @task_router.put("/")
