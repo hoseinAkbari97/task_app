@@ -10,6 +10,7 @@ def get():
 
 @task_router.post("/")
 def add(task: Task):
+    task_list.append(task)
     return {"tasks": task_list}
     
 @task_router.put("/")
