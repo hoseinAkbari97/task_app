@@ -29,3 +29,6 @@ def phone(
 
 app.include_router(router)
 app.include_router(task_router, prefix="/tasks")
+
+# A dummy comment to test git changes
+print("This is a dummy print statement to test git changes 2.")
