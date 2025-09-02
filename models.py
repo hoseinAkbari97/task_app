@@ -17,3 +17,9 @@ class Task(BaseModel):
         if v <= 0:
             raise ValueError('ID must be greater than zero')
         return v
+
+    @field_validator('id')
+    def id_less_than_a_thousand(cls, v):
+        if v >= 1000:
+            raise ValueError('ID must be less than 1000')
+        return v
