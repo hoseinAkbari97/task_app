@@ -11,6 +11,11 @@ class Task(BaseModel):
     name: str
     description: str
     status: StatusType
+
+    @field_validator('name')
+    def id_name_alphanumeric(cls, v):
+        assert v.replace(" ", "").isalnum(), 'Name must be alphanumeric'
+        return v
     
     @field_validator('id')
     def greater_than_zero(cls, v):
