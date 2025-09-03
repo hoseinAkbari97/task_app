@@ -1,6 +1,12 @@
 from pydantic import BaseModel, field_validator, ValidationError
 from enum import Enum
 
+class User(BaseModel):
+    id: int
+    name: str
+    surname: str
+    email: str
+
 class StatusType(str, Enum):
     """Enum for task status."""
     DONE = "done"
@@ -15,6 +21,7 @@ class Task(BaseModel):
     name: str
     description: str
     status: StatusType
+    user: User
     category: Category
 
     @field_validator('name')
