@@ -1,6 +1,22 @@
 from pydantic import BaseModel, field_validator, ValidationError
 from enum import Enum
 
+class MyBaseModel(BaseModel):
+    """my base model for validation"""
+    id: int
+
+    @field_validator('id')
+    def greater_than_zero(cls, v):
+        if v <= 0:
+            raise ValueError('must be greater than zero')
+        return v
+    
+    @field_validator('id')
+    def less_than_a_thousand(cls, v):
+        if v > 1000:
+            raise ValueError('must be less than a thousand')
+        return v
+
 class User(BaseModel):
     id: int
     name: str
