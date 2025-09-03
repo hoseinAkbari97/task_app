@@ -5,12 +5,17 @@ class StatusType(str, Enum):
     """Enum for task status."""
     DONE = "done"
     PENDING = "pending"
+
+class Category(BaseModel):
+    id: int
+    name: str
     
 class Task(BaseModel):
     id: int
     name: str
     description: str
     status: StatusType
+    category: Category
 
     @field_validator('name')
     def id_name_alphanumeric(cls, v):
