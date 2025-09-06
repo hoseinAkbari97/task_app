@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field ,field_validator
 from enum import Enum
+from typing import Optional
 
 class MyBaseModel(BaseModel):
     """my base model for validation"""
@@ -35,7 +36,7 @@ class Category(MyBaseModel):
 class Task(MyBaseModel):
     id: int
     name: str
-    description: str
+    description: Optional [str] = Field("No Description", min_length=3)
     status: StatusType
     user: User
     category: Category
