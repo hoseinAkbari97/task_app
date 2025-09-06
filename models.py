@@ -36,7 +36,7 @@ class Category(MyBaseModel):
 class Task(MyBaseModel):
     id: int
     name: str
-    description: Optional [str] = Field("No Description", min_length=3)
+    description: Optional [str] = Field(None, min_length=3)
     status: StatusType
     user: User
     category: Category
