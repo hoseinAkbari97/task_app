@@ -1,9 +1,9 @@
-from pydantic import BaseModel, field_validator
+from pydantic import BaseModel, Field ,field_validator
 from enum import Enum
 
 class MyBaseModel(BaseModel):
     """my base model for validation"""
-    id: int
+    id: int = Field(ge=1, le=100)
 
     @field_validator('id')
     def greater_than_zero(cls, v):
@@ -19,13 +19,13 @@ class MyBaseModel(BaseModel):
 
 class User(MyBaseModel):
     id: int
-    name: str
+    name: str = Field(min_length=3)
     surname: str
     email: str
 
 class StatusType(str, Enum):
     """Enum for task status."""
-    DONE = "done"
+    READY = "ready"
     PENDING = "pending"
 
 class Category(MyBaseModel):
