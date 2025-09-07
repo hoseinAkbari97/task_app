@@ -45,3 +45,5 @@ class Task(MyBaseModel):
     def id_name_alphanumeric(cls, v):
         assert v.replace(" ", "").isalnum(), 'Name must be alphanumeric'
         return v
+
+print("Damn you async programming")
