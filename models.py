@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field ,field_validator, EmailStr, HttpUrl
 from enum import Enum
-from typing import Optional
+from typing import Optional, List
 
 class MyBaseModel(BaseModel):
     """my base model for validation"""
@@ -41,6 +41,7 @@ class Task(MyBaseModel):
     status: StatusType
     user: User
     category: Category
+    tags: List[str] = []
 
     @field_validator('name')
     def id_name_alphanumeric(cls, v):
