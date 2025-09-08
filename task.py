@@ -1,5 +1,5 @@
-from fastapi import APIRouter, Body
-from models import StatusType, Task
+from fastapi import APIRouter, status
+from models import Task
 
 task_router = APIRouter()
 task_list = []
@@ -8,7 +8,7 @@ task_list = []
 def get():
     return {"tasks": task_list}
 
-@task_router.post("/")
+@task_router.post("/", status_code=status.HTTP_201_CREATED)
 def add(task: Task):
     task_list.append(task)
     return {"tasks": task_list}
