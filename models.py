@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field ,field_validator
+from pydantic import BaseModel, Field ,field_validator, EmailStr, HttpUrl
 from enum import Enum
 from typing import Optional
 
@@ -22,7 +22,8 @@ class User(MyBaseModel):
     id: int
     name: str = Field(min_length=3)
     surname: str
-    email: str
+    email: EmailStr
+    website: HttpUrl
 
 class StatusType(str, Enum):
     """Enum for task status."""
@@ -45,5 +46,3 @@ class Task(MyBaseModel):
     def id_name_alphanumeric(cls, v):
         assert v.replace(" ", "").isalnum(), 'Name must be alphanumeric'
         return v
-
-print("Damn you async programming")
