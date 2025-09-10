@@ -1,12 +1,18 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, status, HTTPException
 from models import Task
 
 task_router = APIRouter()
 task_list = []
 
-@task_router.get("/", status_code=status.HTTP_200_OK)
-def get():
-    return {"tasks": task_list}
+@task_router.get("/{index}", status_code=status.HTTP_200_OK)
+def get(index: int):
+
+    if len(task_list) <= index:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Task ID Doesn't Exist!!",
+        )
+    return {"tasks": task_list[index]}
 
 @task_router.post("/", status_code=status.HTTP_201_CREATED)
 def add(task: Task):
@@ -15,6 +21,12 @@ def add(task: Task):
     
 @task_router.put("/", status_code=status.HTTP_200_OK)
 def update(index: int, task: Task):
+    if len(task_list) <= index:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Task ID Doesn't exist!!",
+        )
+    
     task_list[index] = {
         "task": task.name,
         "status": task.status,
