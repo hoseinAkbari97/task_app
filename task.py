@@ -37,6 +37,3 @@ def update(index: int, task: Task):
 def delete(index: int):
     del task_list[index]
     return {"tasks": task_list}
-
-print("Hi marco")
-print("Hi non-linear control")
