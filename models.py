@@ -60,6 +60,13 @@ class Task(MyBaseModel):
                     "category": {
                         "id": 1234,
                         "name": "Category 1"
+                    },
+                    "user": {
+                        "id": 12,
+                        "name": "Alejandro",
+                        "email": "Alejandro@gmail.com",
+                        "surname": "Gonzales",
+                        "website": "https://Alekhandro.org"
                     }
                 }
             ]
