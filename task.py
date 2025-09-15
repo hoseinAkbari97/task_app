@@ -16,6 +16,11 @@ def get(index: int):
 
 @task_router.post("/", status_code=status.HTTP_201_CREATED)
 def add(task: Task):
+    if task in task_list:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Task " + task.name + " already exists!"
+        )
     task_list.append(task)
     return {"tasks": status.HTTP_201_CREATED}
     
