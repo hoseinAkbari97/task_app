@@ -47,3 +47,17 @@ class Task(MyBaseModel):
     def id_name_alphanumeric(cls, v):
         assert v.replace(" ", "").isalnum(), 'Name must be alphanumeric'
         return v
+    
+    model_config = {
+        "json_schema_extra": {
+            "examples" : [
+                {
+                    "id": 123,
+                    "name": "jose de martin",
+                    "description": "Hello from the earth",
+                    "status": StatusType.PENDING,
+                    "tag": ["tag 1", "tag 2"]
+                }
+            ]
+        }
+    }
