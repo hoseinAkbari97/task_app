@@ -56,7 +56,11 @@ class Task(MyBaseModel):
                     "name": "jose de martin",
                     "description": "Hello from the earth",
                     "status": StatusType.PENDING,
-                    "tag": ["tag 1", "tag 2"]
+                    "tag": ["tag 1", "tag 2"],
+                    "category": {
+                        "id": 1234,
+                        "name": "Category 1"
+                    }
                 }
             ]
         }
