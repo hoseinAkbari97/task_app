@@ -1,4 +1,4 @@
-from fastapi import APIRouter, status, HTTPException
+from fastapi import APIRouter, Body, status, HTTPException
 from models import Task
 
 task_router = APIRouter()
@@ -25,7 +25,12 @@ def add(task: Task):
     return {"tasks": status.HTTP_201_CREATED}
     
 @task_router.put("/", status_code=status.HTTP_200_OK)
-def update(index: int, task: Task):
+def update(index: int, task: Task = Body(
+    example= {
+        "id": 123,
+        "name": "xavier",
+    }
+)):
     if len(task_list) <= index:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
