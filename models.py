@@ -1,74 +1,78 @@
-from pydantic import BaseModel, Field ,field_validator, EmailStr, HttpUrl
 from enum import Enum
 from typing import Optional, List
+from pydantic import BaseModel, validator, Field, EmailStr, HttpUrl
+
+class StatusType(str,Enum):
+    DONE = "done"
+    PENDING = "pending"
 
 class MyBaseModel(BaseModel):
-    """my base model for validation"""
-    id: int = Field(ge=1, le=100)
+    id:int = Field(gt=1, le=10000)
 
-    @field_validator('id')
-    def greater_than_zero(cls, v):
-        if v <= 0:
+    @validator('id')
+    def id_greater_than_zero(cls, v):
+        if v<=0 :
             raise ValueError('must be greater than zero')
         return v
     
-    @field_validator('id')
-    def less_than_a_thousand(cls, v):
-        if v > 1000:
-            raise ValueError('must be less than a thousand')
+    @validator('id')
+    def id_less_than_thousand(cls, v):
+        if v >= 10000 :
+            raise ValueError('must be less than thousand')
         return v
-
-class User(MyBaseModel):
-    id: int
-    name: str = Field(min_length=3)
-    surname: str
-    email: EmailStr
-    website: HttpUrl
-
-class StatusType(str, Enum):
-    """Enum for task status."""
-    READY = "ready"
-    PENDING = "pending"
 
 class Category(MyBaseModel):
-    id: int
     name: str
-    
-class Task(MyBaseModel):
-    id: int
-    name: str
-    description: Optional [str] = Field(None, min_length=3)
-    status: StatusType
-    user: User
-    category: Category
-    tags: List[str] = []
+    # class Config:
+    #     schema_extra = {
+    #         "example": {
+    #             "id" : 1234,
+    #             "name": "Cate 1"
+    #         }
+    #     }
 
-    @field_validator('name')
-    def id_name_alphanumeric(cls, v):
-        assert v.replace(" ", "").isalnum(), 'Name must be alphanumeric'
-        return v
-    
-    model_config = {
-        "json_schema_extra": {
-            "examples" : [
-                {
-                    "id": 123,
-                    "name": "jose de martin",
-                    "description": "Hello from the earth",
-                    "status": StatusType.PENDING,
-                    "tag": ["tag 1", "tag 2"],
-                    "category": {
-                        "id": 1234,
-                        "name": "Category 1"
-                    },
-                    "user": {
-                        "id": 12,
-                        "name": "Alejandro",
-                        "email": "Alejandro@gmail.com",
-                        "surname": "Gonzales",
-                        "website": "https://Alekhandro.org"
-                    }
+class User(MyBaseModel):
+    name: str = Field(min_length=5)
+    surname: str
+    email: EmailStr
+    website: str #HttpUrl
+
+class Task(MyBaseModel):
+    name: str
+    description: Optional[str] = Field("No description",min_length=5)
+    status: StatusType
+    category: Category
+    user: User
+    # tags: List[str] = []
+    tags: set[str] = set()
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "id" : 123,
+                "name": "Hossein",
+                "description": "Hello",
+                "status": StatusType.PENDING,
+                "tag":["tag 1", "tag 2"],
+                "category": {
+                    "id":1234,
+                    "name":"Cate 1"
+                },
+                "user": {
+                    "id":12,
+                    "name":"Andres",
+                    "email":"admin@admin.com",
+                    "surname":"Cruz",
+                    "website":"http://desarrollolibre.net",
                 }
-            ]
+            }
         }
-    }
+
+    @validator('name')
+    def name_alphanumeric_and_whitespace(cls, v):
+        if v.replace(" ", '').isalnum():
+            return v
+        raise ValueError('must be a alphanumeric')
+        
+
+
