@@ -27,11 +27,31 @@ def page(
 # ):
 #     return {"phone": phone}
 
+# @app.get("/ep_phone/{phone}")
+# def phone(phone: str =
+#           Path(pattern=r"^(\(?\+[\d]{1,3}\)?)\s?([\d][\s\.-]?){6,7}$", example="+34 111" \
+#           "12-34-56")):
+#     return {"Phone": phone}
+
 @app.get("/ep_phone/{phone}")
 def phone(phone: str =
-          Path(pattern=r"^(\(?\+[\d]{1,3}\)?)\s?([\d][\s\.-]?){6,7}$", example="+34 111" \
-          "12-34-56")):
-    return {"Phone": phone}
+    Path(
+        pattern=r"^(\(?\+[\d]{1,3}\)?)\s?([\d]{1,5})\s?([\d][\s\.-]?){6,7}$",
+        examples=[
+            {
+                "summary": "A normal example 1",
+                "description": "A normal example",
+                "value": "+34 111 12-34-56"
+            },
+            {
+                "summary": "A normal example 2",
+                "description": "A normal example",
+                "value": "+34 111 12-34-59"
+            }
+        ]
+    )
+):
+    return {"phone": phone}
 
 app.include_router(router)
 app.include_router(task_router, prefix="/tasks")
