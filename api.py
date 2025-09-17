@@ -19,13 +19,19 @@ def page(
 ):
     return {"page": page, "size": size}
 
-@app.get("/phone/{phone}")
-# The phone number is like +34 111 12-34-56
-def phone(
-    phone: str = 
-    Path(pattern=r"^(\(?\+[\d]{1,3}\)?)\s?([\d]{1,5})\s?([\d][\s\.-]?){6,7}$" )
-):
-    return {"phone": phone}
+# @app.get("/phone/{phone}")
+# # The phone number is like +34 111 12-34-56
+# def phone(
+#     phone: str = 
+#     Path(pattern=r"^(\(?\+[\d]{1,3}\)?)\s?([\d]{1,5})\s?([\d][\s\.-]?){6,7}$" )
+# ):
+#     return {"phone": phone}
+
+@app.get("/ep_phone/{phone}")
+def phone(phone: str =
+          Path(pattern=r"^(\(?\+[\d]{1,3}\)?)\s?([\d][\s\.-]?){6,7}$", example="+34 111" \
+          "12-34-56")):
+    return {"Phone": phone}
 
 app.include_router(router)
 app.include_router(task_router, prefix="/tasks")
