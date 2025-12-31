@@ -6,7 +6,7 @@ app = FastAPI()
 router = APIRouter()
 
 @router.get('/hello')
-def hello_world():
+def hello_world() -> dict:
     return { "hello": "world" }
 
 
