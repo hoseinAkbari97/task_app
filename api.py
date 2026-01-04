@@ -38,7 +38,6 @@ def phone(phone: str =
     )
 ):
     return {"phone": phone}
-    return {"phone": phone}
 
 
 app.include_router(router)
