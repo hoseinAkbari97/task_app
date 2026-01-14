@@ -19,3 +19,6 @@ venv.bak/
 # Editor and IDE files (optional but recommended)
 .vscode/
 .idea/
+
+# Uploaded files directory
+img/
