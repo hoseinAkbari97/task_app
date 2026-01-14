@@ -1,5 +1,5 @@
 from fastapi import FastAPI, APIRouter, Query, Path
-
+from myupload import upload_router
 from task import task_router
 
 app = FastAPI()
@@ -42,3 +42,4 @@ def phone(phone: str =
 
 app.include_router(router)
 app.include_router(task_router, prefix='/tasks')
+app.include_router(upload_router, prefix='/upload')
