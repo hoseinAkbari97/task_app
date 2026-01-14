@@ -1,4 +1,5 @@
 from fastapi import APIRouter, File, UploadFile
+from typing import List
 import shutil
 
 upload_router = APIRouter()
@@ -20,3 +21,10 @@ def upload_file2(file: UploadFile):
     with open(f"img/uploaded_{file.filename}", "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
     return {"filename": file.filename}
+
+@upload_router.post("/uploadfile3/")
+def upload_file3(images: List[UploadFile] = File()):
+    
+    for image in images:
+        with open(f"img/{image.filename}", "wb") as buffer:
+            shutil.copyfileobj(image.file, buffer)
