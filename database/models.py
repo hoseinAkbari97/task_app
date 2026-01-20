@@ -5,7 +5,7 @@ from database.database import Base
 from schemas import StatusType
 
 class Task(Base):
-    __table__ = "tasks"
+    __tablename__ = "tasks"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(20))
     description = Column(Text())
