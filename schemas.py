@@ -35,7 +35,7 @@ class User(MyBaseModel):
     name: str = Field(min_length=5)
     surname: str
     email: EmailStr
-    website: str #HttpUrl
+    website: str 
 
 class Task(MyBaseModel):
     name: str
@@ -47,6 +47,7 @@ class Task(MyBaseModel):
     tags: set[str] = set()
 
     class Config:
+        from_attributes = True
         schema_extra = {
             "example": {
                 "id" : 123,

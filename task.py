@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Body, status, HTTPException
 
-from models import Task, StatusType
+from schemas import Task, StatusType
 
 task_router = APIRouter()
 task_list= [
