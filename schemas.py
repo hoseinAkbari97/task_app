@@ -74,6 +74,3 @@ class Task(MyBaseModel):
         if v.replace(" ", '').isalnum():
             return v
         raise ValueError('must be a alphanumeric')
-        
-
-
