@@ -22,3 +22,6 @@ venv.bak/
 
 # Uploaded files directory
 img/
+
+# .env file (contains sensitive information)
+.env

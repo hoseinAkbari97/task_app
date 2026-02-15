@@ -1,4 +1,6 @@
-from fastapi import FastAPI, APIRouter, Query, Path
+from fastapi import FastAPI, APIRouter, Query, Path, Depends
+from sqlalchemy.orm import Session
+from database.database import get_database_session
 from myupload import upload_router
 from task import task_router
 
@@ -44,6 +46,10 @@ def phone(phone: str =
 ):
     return {"phone": phone}
 
+@app.get("/page/")
+def page(db: Session = Depends(get_database_session)):
+    get_task(db, 1)
+    return {"page": 1}
 
 app.include_router(router)
 app.include_router(task_router, prefix='/tasks')
