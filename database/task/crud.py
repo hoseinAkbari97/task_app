@@ -2,6 +2,13 @@ from sqlalchemy.orm import Session
 
 from schemas import Task
 from database import models
+from database.pagination import PageParams, paginate
+
+def pagination(page: int, size: int, db: Session):
+    pageParams = PageParams()
+    pageParams.page = page
+    pageParams.size = size
+    return paginate(pageParams, db.query(models.Task).filter(models.Task.id > 2), Task)
 
 def getById(db: Session, id: int):
     # task = db.query(models.Task).filter(models.Task.id == id).first()
