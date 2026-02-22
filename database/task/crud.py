@@ -20,7 +20,12 @@ def getAll(db: Session):
     return tasks
 
 def create(task: Task, db: Session):
-    taskdb = models.Task(name=task.name, description=task.description, status=task.status)
+    taskdb = models.Task(
+        name=task.name, 
+        description=task.description, 
+        status=task.status,
+        category_id = task.category_id,
+        user_id = task.user_id)
     db.add(taskdb)
     db.commit()
     db.refresh(taskdb)
@@ -33,6 +38,8 @@ def update(id: int, task: Task, db: Session):
     taskdb.name = task.name
     taskdb.description = task.description
     taskdb.status = task.status
+    taskdb.category_id = task.category_id
+    taskdb.user_id = task.user_id
     
     db.add(taskdb)
     db.commit()
