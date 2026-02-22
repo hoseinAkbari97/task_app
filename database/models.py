@@ -1,5 +1,6 @@
-from sqlalchemy.schema import Column
+from sqlalchemy.schema import Column, ForeignKey
 from sqlalchemy.types import String, Integer, Text, Enum
+from sqlalchemy.orm import relationship
 
 from database.database import Base
 from schemas import StatusType
@@ -10,3 +11,21 @@ class Task(Base):
     name = Column(String(20))
     description = Column(Text())
     status = Column(Enum(StatusType))
+    category_id = Column(Integer, ForeignKey('categories.id'),
+        nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id'),
+        nullable=False)
+    
+class Category(Base):
+    __tablename__ = 'categories'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(20))
+    
+class User(Base):
+    __tablename__ = 'users'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(20))
+    surname = Column(String(20))
+    email = Column(String(50))
+    website = Column(String(50))
+    
